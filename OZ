@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>So Cozy Tires</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <h1>So Cozy LLC</h1>
+  <p>Call (850) 816-1554</p>
+</header>
+
+<section class="hero">
+  <h2>Available Tire Inventory</h2>
+  <p>Call for pricing and availability</p>
+</section>const sizes = [
+"195/65R15","205/65R15","215/70R15","235/75R15",
+"205/55R16","205/65R16","265/70R16","265/75R16","235/60R16","215/60R16",
+"215/55R17","225/60R17","225/65R17","265/70R17","225/45R17","235/65R17","265/65R17",
+"245/60R18","235/65R18","275/65R18","225/45R18","235/55R18","265/65R18","225/55R18",
+"235/55R19","245/45R19","255/55R19","265/55R19","235/40R19","225/55R19",
+"275/60R20","245/40R20","245/45R20","255/55R20","235/55R20"
+];
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  color: #333;
+}
+
+header {
+  background: #111;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.hero {
+  background: #222;
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.filter-section {
+  text-align: center;
+  padding: 20px;
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+#inventory {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.card button {
+  margin-top: 10px;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: #111;
+  color: white;
+  cursor: pointer;
+}
+
+footer {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+const inventoryContainer = document.getElementById("inventory");
+const sizeFilter = document.getElementById("sizeFilter");
+
+// Populate dropdown
+sizes.forEach(size => {
+  const option = document.createElement("option");
+  option.value = size;
+  option.textContent = size;
+  sizeFilter.appendChild(option);
+});
+
+// Display inventory
+function displayInventory(filter) {
+  inventoryContainer.innerHTML = "";
+
+  const filtered = filter === "all" ? sizes : sizes.filter(size => size === filter);
+
+  filtered.forEach(size => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <h3>${size}</h3>
+      <p>In Stock</p>
+      <button onclick="callNow()">Call (850) 816-1554</button>
+    `;
+
+    inventoryContainer.appendChild(card);
+  });
+}
+
+sizeFilter.addEventListener("change", (e) => {
+  displayInventory(e.target.value);
+});
+
+function callNow() {
+  window.location.href = "tel:8508161554";
+}
+
+displayInventory("all");
+
+<section class="filter-section">
+  <select id="sizeFilter">
+    <option value="all">Filter by Size</option>
+  </select>
+</section>
+
+<section id="inventory"></section>
+
+<footer>
+  <p>info@socozytires.com</p>
+  <p>(850) 816-1554</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
